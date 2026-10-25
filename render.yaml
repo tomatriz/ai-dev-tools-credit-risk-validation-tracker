@@ -21,11 +21,8 @@ services:
     plan: free
     rootDir: frontend
     envVars:
-      - key: BACKEND_HOSTPORT
-        fromService:
-          name: crvt-api
-          type: web
-          property: hostport
+      - key: BACKEND_ORIGIN
+        value: https://crvt-api.onrender.com
 
 databases:
   - name: crvt-postgres
