@@ -57,11 +57,15 @@ Observed command output belongs in `evidence/` or a linked CI run. A checked-in 
 
 On 2026-10-25, `scripts/test.ps1` completed successfully from the repository root:
 
-- backend: 21 passed, with one third-party Starlette deprecation warning;
+- backend: 23 passed in public CI, with one third-party Starlette deprecation warning;
 - bounded responder: 2 passed;
 - frontend: 8 passed in two files;
 - TypeScript/Vite production build: passed;
 - `npm ci` audit: 0 vulnerabilities.
 
 `docker compose config --quiet` also passed. The hardened backend, frontend and responder images rebuilt successfully. The complete stack became healthy on alternate loopback ports, an upload through the frontend proxy returned 201, and validation `89bcf4d7-f3f5-45c9-943f-deb77b5bff30` remained available after a backend restart. The final incident script observed the controlled 503, verified alert-to-responder remediation, completed a post-recovery upload and emitted `INCIDENT_DEMO_OK`.
+
+[Public CI run 40245553956](https://github.com/tomatriz/ai-dev-tools-credit-risk-validation-tracker/actions/runs/40245553956) repeated the backend, responder, frontend, production-build, Compose-contract and Prometheus-rule checks successfully. [Development deployment run 40245588041](https://github.com/tomatriz/ai-dev-tools-credit-risk-validation-tracker/actions/runs/40245588041) then published the tested revision automatically.
+
+Public production smoke tests returned HTTP 200 from both dashboards and `/health`, confirmed database status `ok`, accepted the valid sample CSV, returned 12 records and a trace ID, allowed the GitHub Pages browser origin, and retrieved a validation created before an API redeployment.
 

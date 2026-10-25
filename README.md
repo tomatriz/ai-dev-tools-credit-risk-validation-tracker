@@ -4,6 +4,16 @@ An end-to-end, observable application for validating synthetic probability-of-de
 
 > **Educational demonstration — not regulatory advice.** PASS/WARNING/FAIL thresholds in this repository are configurable example policy. They are not OSFI, Basel, EBA, IFRS 9, or any other regulatory requirements. Do not upload customer or confidential data.
 
+## Live application
+
+| Environment | Interface | URL |
+|---|---|---|
+| Production | Dashboard | https://crvt-dashboard.onrender.com |
+| Production | OpenAPI / Swagger | https://crvt-api.onrender.com/docs |
+| Development (automatic after CI) | Dashboard | https://tomatriz.github.io/ai-dev-tools-credit-risk-validation-tracker/ |
+
+The production dashboard, API, managed PostgreSQL persistence, sample upload/history flow and cross-deployment persistence were verified on 2026-10-25. See the [sanitized public deployment transcript](evidence/PUBLIC_DEPLOYMENT_2026-10-25.md). Free Render services may cold-start. The free PostgreSQL instance reports expiration on 2026-11-24.
+
 ## Problem and expected behavior
 
 Model validators repeatedly check input quality, compare predicted PD with observed defaults, assess calibration, document findings, and return to earlier runs. Spreadsheet-only workflows can make formulas, policy thresholds, evidence, and operational failures difficult to reproduce.
@@ -134,7 +144,7 @@ npm --prefix frontend run build
 
 Verified local results on 2026-10-25:
 
-- backend: **21 passed**;
+- backend: **23 passed** in public CI;
 - bounded responder: **2 passed**;
 - frontend: **8 passed** across two test files;
 - frontend production build: **passed**;
@@ -173,11 +183,11 @@ The flag causes upload requests to return `503` without deleting data. Prometheu
 | Stage | Trigger | Control |
 |---|---|---|
 | CI | every PR and `main` push | backend, frontend, responder, Compose and Prometheus checks |
-| Development | successful CI on `main` | automatic deploy hook |
-| Production | manual workflow dispatch | protected environment and exact 40-character SHA |
+| Development | successful CI on `main` | automatic GitHub Pages deployment of the tested SHA |
+| Production | manual promotion | exact tested 40-character SHA; protected workflow path is also provided |
 | Rollback | manual workflow dispatch | known-good exact SHA and incident reference |
 
-`render.yaml` describes frontend, backend, and managed PostgreSQL deployment. External deployment status is recorded honestly in [Submission Status](docs/SUBMISSION_STATUS.md); configuration is not presented as proof of a live deployment.
+`render.yaml` describes frontend, backend, and managed PostgreSQL deployment. [CI run 40245553956](https://github.com/tomatriz/ai-dev-tools-credit-risk-validation-tracker/actions/runs/40245553956) passed and [development run 40245588041](https://github.com/tomatriz/ai-dev-tools-credit-risk-validation-tracker/actions/runs/40245588041) deployed automatically. The manual Render production deployment, public smoke tests and remaining course-form status are recorded in [Submission Status](docs/SUBMISSION_STATUS.md).
 
 ## Product and agent workflow
 
