@@ -1,5 +1,10 @@
+import os
+
 import httpx
 import pytest
+
+os.environ.setdefault("OPS_TOKEN", "test-ops-token")
+os.environ.setdefault("WEBHOOK_TOKEN", "test-webhook-token")
 
 from app import main
 
@@ -11,9 +16,9 @@ async def test_bounded_responder_diagnoses_recovers_and_verifies(monkeypatch):
     def handler(request: httpx.Request) -> httpx.Response:
         seen.append((request.method, request.url.path))
         if request.url.path.endswith("/ops/incident"):
-            return httpx.Response(200, json={"validation_failure_enabled": True})
+            return httpx.Response(200, json={"enabled": True})
         if request.url.path.endswith("/ops/incident/recover"):
-            return httpx.Response(200, json={"validation_failure_enabled": False})
+            return httpx.Response(200, json={"enabled": False})
         if request.url.path == "/health":
             return httpx.Response(200, json={"status": "ok"})
         if request.url.path.endswith("/validations"):

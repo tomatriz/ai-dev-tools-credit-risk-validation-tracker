@@ -17,22 +17,39 @@ permissions:
   deployments: write
 
 jobs:
+  verify-release:
+    runs-on: ubuntu-latest
+    outputs:
+      release_sha: ${{ steps.validate.outputs.release_sha }}
+    steps:
+      - name: Validate immutable rollback input
+        id: validate
+        env:
+          REQUESTED_SHA: ${{ inputs.known_good_sha }}
+        run: |
+          [[ "$REQUESTED_SHA" =~ ^[0-9a-f]{40}$ ]]
+          echo "release_sha=$REQUESTED_SHA" >> "$GITHUB_OUTPUT"
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.validate.outputs.release_sha }}
+      - name: Verify rollback target
+        env:
+          RELEASE_SHA: ${{ steps.validate.outputs.release_sha }}
+        run: |
+          test "$(git rev-parse HEAD)" = "$RELEASE_SHA"
+
   rollback:
+    needs: verify-release
     runs-on: ubuntu-latest
     environment: production
     steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: ${{ inputs.known_good_sha }}
-      - name: Verify rollback target
-        run: |
-          [[ "${{ inputs.known_good_sha }}" =~ ^[0-9a-f]{40}$ ]]
-          test "$(git rev-parse HEAD)" = "${{ inputs.known_good_sha }}"
       - name: Deploy known-good revision
         env:
           DEPLOY_HOOK: ${{ secrets.RENDER_PRODUCTION_DEPLOY_HOOK }}
-          RELEASE_SHA: ${{ inputs.known_good_sha }}
+          RELEASE_SHA: ${{ needs.verify-release.outputs.release_sha }}
+          INCIDENT_REFERENCE: ${{ inputs.incident_reference }}
         run: |
           test -n "$DEPLOY_HOOK"
+          test -n "$INCIDENT_REFERENCE"
           curl --fail-with-body --retry 3 --request POST "$DEPLOY_HOOK&ref=$RELEASE_SHA"
 

@@ -53,3 +53,15 @@ Success requires all of the following: the upload fails while the incident flag 
 
 Observed command output belongs in `evidence/` or a linked CI run. A checked-in test is not proof that it passed. `docs/EVALUATION.md` distinguishes implementation evidence from runtime evidence and is updated after final verification.
 
+## Latest observed results
+
+On 2026-10-25, `scripts/test.ps1` completed successfully from the repository root:
+
+- backend: 21 passed, with one third-party Starlette deprecation warning;
+- bounded responder: 2 passed;
+- frontend: 8 passed in two files;
+- TypeScript/Vite production build: passed;
+- `npm ci` audit: 0 vulnerabilities.
+
+`docker compose config --quiet` also passed. A previous Compose run verified upload, history, PostgreSQL restart persistence and all service health checks. The final hardened image rebuild and alert-to-responder rerun remain pending because Docker Desktop cannot currently start on this host; project volumes were not reset or deleted.
+

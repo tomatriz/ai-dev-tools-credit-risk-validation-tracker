@@ -9,7 +9,7 @@ down:
 test: test-backend test-frontend test-oncall
 
 test-backend:
-	python -m pytest backend/tests
+	PYTHONPATH=backend python -m pytest backend/tests
 
 test-frontend:
 	npm --prefix frontend ci
@@ -17,7 +17,7 @@ test-frontend:
 	npm --prefix frontend run build
 
 test-oncall:
-	python -m pytest oncall/tests
+	PYTHONPATH=oncall python -m pytest oncall/tests
 
 incident:
 	powershell -ExecutionPolicy Bypass -File scripts/demo-incident.ps1

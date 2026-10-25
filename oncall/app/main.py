@@ -16,8 +16,22 @@ logging.basicConfig(level=logging.INFO, format="%(message)s")
 logger = logging.getLogger("crvt.oncall")
 
 BACKEND_URL = os.getenv("BACKEND_URL", "http://backend:8000").rstrip("/")
-OPS_TOKEN = os.getenv("OPS_TOKEN", "local-demo-token")
-WEBHOOK_TOKEN = os.getenv("WEBHOOK_TOKEN", "local-alert-token")
+
+
+def _required_token(name: str, local_default: str) -> str:
+    value = os.getenv(name)
+    if value:
+        return value
+    if os.getenv("ALLOW_INSECURE_DEMO_CREDENTIALS", "false").lower() == "true":
+        return local_default
+    raise RuntimeError(
+        f"{name} must be configured; local defaults require "
+        "ALLOW_INSECURE_DEMO_CREDENTIALS=true"
+    )
+
+
+OPS_TOKEN = _required_token("OPS_TOKEN", "local-demo-token")
+WEBHOOK_TOKEN = _required_token("WEBHOOK_TOKEN", "local-alert-token")
 
 app = FastAPI(
     title="Credit Risk Validation On-Call Responder",
@@ -71,10 +85,10 @@ async def handle_user_impact_alert(client: httpx.AsyncClient) -> RemediationResu
         diagnosed = True
         _emit("incident_diagnosed", incident_state=state)
 
-        if state.get("validation_failure_enabled") is True:
+        if state.get("enabled") is True:
             recovery = await client.post(f"{BACKEND_URL}/api/v1/ops/incident/recover", headers=headers)
             recovery.raise_for_status()
-            remediated = recovery.json().get("validation_failure_enabled") is False
+            remediated = recovery.json().get("enabled") is False
         else:
             remediated = True
 

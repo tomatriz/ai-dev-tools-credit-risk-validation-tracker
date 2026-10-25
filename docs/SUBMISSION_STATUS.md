@@ -9,12 +9,14 @@
 | Public repository | Pending publication |
 | Evaluated commit SHA | Pending final verified commit |
 | Public deployment | Pending external deployment |
-| Tests | In progress |
+| Tests | 21 backend + 2 responder + 8 frontend passed; frontend build passed; npm audit 0 |
 | Course portal | Open; login required |
 | Portal confirmation | Not saved yet |
 | Time spent | Measured from work log before submission; never estimated retroactively |
 | Certificate name | Must be read from authenticated profile or confirmed by user |
 | Peer reviews | Three required after submission; not completed by this project build |
+
+Local full-stack upload/history/persistence was verified before the final hardening changes. Compose configuration validates after hardening, but Docker Desktop is currently unavailable on the host, so the final image rebuild and alert-to-responder drill are not yet claimed.
 
 ## Evidence required before changing status
 

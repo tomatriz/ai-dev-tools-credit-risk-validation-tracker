@@ -15,14 +15,24 @@ permissions:
 jobs:
   verify-release:
     runs-on: ubuntu-latest
+    outputs:
+      release_sha: ${{ steps.validate.outputs.release_sha }}
     steps:
+      - name: Validate immutable release input
+        id: validate
+        env:
+          REQUESTED_SHA: ${{ inputs.release_sha }}
+        run: |
+          [[ "$REQUESTED_SHA" =~ ^[0-9a-f]{40}$ ]]
+          echo "release_sha=$REQUESTED_SHA" >> "$GITHUB_OUTPUT"
       - uses: actions/checkout@v4
         with:
-          ref: ${{ inputs.release_sha }}
-      - name: Require full SHA and verify commit
+          ref: ${{ steps.validate.outputs.release_sha }}
+      - name: Verify checked-out commit
+        env:
+          RELEASE_SHA: ${{ steps.validate.outputs.release_sha }}
         run: |
-          [[ "${{ inputs.release_sha }}" =~ ^[0-9a-f]{40}$ ]]
-          test "$(git rev-parse HEAD)" = "${{ inputs.release_sha }}"
+          test "$(git rev-parse HEAD)" = "$RELEASE_SHA"
 
   deploy:
     needs: verify-release
@@ -32,7 +42,7 @@ jobs:
       - name: Trigger protected production deployment
         env:
           DEPLOY_HOOK: ${{ secrets.RENDER_PRODUCTION_DEPLOY_HOOK }}
-          RELEASE_SHA: ${{ inputs.release_sha }}
+          RELEASE_SHA: ${{ needs.verify-release.outputs.release_sha }}
         run: |
           test -n "$DEPLOY_HOOK"
           curl --fail-with-body --retry 3 --request POST "$DEPLOY_HOOK&ref=$RELEASE_SHA"

@@ -17,10 +17,11 @@ Metrics do not carry trace IDs as labels because that would create unbounded car
 
 ## Signals
 
-- `crvt_validation_requests_total{outcome="success|failure"}`: user-journey outcomes.
+- `crvt_validation_requests_total{outcome="success|incident_failure|validation_error|capacity_reached|server_error"}`: user-journey outcomes.
+- `crvt_validation_incident_active`: resolvable user-impact gauge used by `ValidationUserImpact`.
 - standard process/runtime metrics from the Prometheus client.
-- structured events for upload start/completion, input rejection, incident state and remediation.
-- OpenTelemetry spans for incoming FastAPI requests and validation processing.
+- structured request, successful upload, incident rejection, incident state and remediation events.
+- an OpenTelemetry span for each incoming FastAPI request, covering validation processing.
 
 CSV contents, observation identifiers, database credentials, tokens and customer data are excluded from telemetry. Safe metadata such as record counts and classification status may be logged.
 

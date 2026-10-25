@@ -313,7 +313,7 @@ La API instrumenta el upload; expone métricas, emite JSON y exporta OTLP. Alloy
 
 ### D. Ejemplo práctico
 
-Una respuesta 503 incluye `X-Trace-ID`. Buscar ese ID en Loki muestra el evento; el enlace abre Tempo; la métrica `crvt_validation_requests_total{outcome="failure"}` ubica el impacto en el tiempo.
+Una respuesta 503 incluye `X-Trace-ID`. Buscar ese ID en Loki muestra el evento; el enlace abre Tempo; la métrica `crvt_validation_requests_total{outcome="incident_failure"}` ubica el impacto en el tiempo.
 
 ### E. Aplicación a enterprise
 
@@ -383,7 +383,7 @@ Un control de seguridad reduce probabilidad o impacto. En datos de crédito, min
 
 ### B. Explicación técnica
 
-Secretos llegan por entorno; cargas se validan; SQLAlchemy parametriza; CORS se restringe por configuración; logs omiten contenido; endpoints operativos requieren token; el responder tiene allow-list. Las dependencias se fijan y CI escanea estructura/secretos.
+Secretos llegan por entorno; cargas se validan; SQLAlchemy parametriza; CORS se restringe por configuración; logs omiten contenido; endpoints operativos requieren token; el responder tiene allow-list. Las dependencias se fijan; CI valida tests/build/Compose y la revisión final separada busca secretos y riesgos de código/configuración.
 
 ### C. Implementación real
 

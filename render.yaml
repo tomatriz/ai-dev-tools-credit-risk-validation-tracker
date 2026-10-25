@@ -14,6 +14,8 @@ services:
         generateValue: true
       - key: OTEL_SDK_DISABLED
         value: "true"
+      - key: CORS_ORIGINS
+        sync: false
 
   - type: web
     name: crvt-dashboard

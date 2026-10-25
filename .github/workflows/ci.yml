@@ -23,11 +23,13 @@ jobs:
       - name: Install backend dependencies
         run: pip install -r backend/requirements.txt -r backend/requirements-dev.txt
       - name: Test backend
-        run: pytest -q backend/tests
+        run: pytest -q tests
+        working-directory: backend
       - name: Install responder dependencies
         run: pip install -r oncall/requirements.txt
       - name: Test bounded responder
-        run: PYTHONPATH=oncall pytest -q oncall/tests
+        run: pytest -q tests
+        working-directory: oncall
 
   frontend:
     runs-on: ubuntu-latest

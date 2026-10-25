@@ -11,6 +11,8 @@ docker compose up --build
 
 Open the dashboard at `http://localhost:3000`, API documentation at `http://localhost:8000/docs`, Grafana at `http://localhost:3001`, Prometheus at `http://localhost:9090`, and Alertmanager at `http://localhost:9093`.
 
+If a default port is already used, copy `.env.example` and change the corresponding `CRVT_*_PORT` value; container-to-container contracts do not change.
+
 ## Public deployment design
 
 `render.yaml` is a declarative Render blueprint for the frontend, backend and managed PostgreSQL database. Create the blueprint from the public GitHub repository, set the frontend API URL to the deployed backend URL, and verify `/health`, `/docs`, a sample upload, history retrieval and persistence across a backend restart.

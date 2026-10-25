@@ -2,7 +2,9 @@ groups:
   - name: credit-risk-validation-user-impact
     rules:
       - alert: ValidationUserImpact
-        expr: increase(crvt_validation_requests_total{outcome="failure"}[1m]) >= 1
+        # The gauge becomes active only after a real upload receives the simulated
+        # failure and returns to zero when the bounded recovery disables the flag.
+        expr: crvt_validation_incident_active == 1
         for: 0s
         labels:
           severity: critical

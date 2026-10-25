@@ -2,7 +2,7 @@
 
 ## User impact and alert
 
-`ValidationUserImpact` fires when at least one CSV validation request fails in the previous minute. This intentionally watches a user function rather than CPU or memory. In a real service the expression would be tuned with traffic volume, error budget and multi-window thresholds; one failure is appropriate here because the incident is a controlled demonstration.
+`ValidationUserImpact` fires when `crvt_validation_incident_active == 1`. The gauge becomes active only after a real upload request receives the controlled `503`, then returns to zero when the bounded recovery disables the flag. This makes the alert both reproducible and resolvable. It watches user impact rather than CPU or memory. In a real service the expression would be tuned with traffic volume, error budget and multi-window thresholds; one failure is appropriate here because this is a controlled demonstration.
 
 ## Safe reproduction
 

@@ -5,5 +5,8 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 COPY app ./app
+RUN addgroup --system crvt && adduser --system --ingroup crvt crvt \
+    && chown -R crvt:crvt /app
+USER crvt
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8090"]
 
