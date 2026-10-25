@@ -3,9 +3,7 @@ services:
     name: crvt-api
     runtime: docker
     plan: free
-    autoDeployTrigger: checksPass
     rootDir: backend
-    dockerfilePath: ./Dockerfile
     healthCheckPath: /health
     envVars:
       - key: DATABASE_URL
@@ -21,9 +19,7 @@ services:
     name: crvt-dashboard
     runtime: docker
     plan: free
-    autoDeployTrigger: checksPass
     rootDir: frontend
-    dockerfilePath: ./Dockerfile
     envVars:
       - key: BACKEND_HOSTPORT
         fromService:
@@ -33,7 +29,5 @@ services:
 
 databases:
   - name: crvt-postgres
-    databaseName: credit_risk
-    user: credit_risk
     plan: free
 
