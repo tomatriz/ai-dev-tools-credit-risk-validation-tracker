@@ -1,0 +1,4 @@
+observation_id,predicted_pd,default_flag
+C001,0.10,0
+C001,1.20,2
+C003,,0

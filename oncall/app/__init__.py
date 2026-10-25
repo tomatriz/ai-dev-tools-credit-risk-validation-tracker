@@ -1,0 +1,2 @@
+"""Bounded alert responder."""
+

@@ -1,0 +1,14 @@
+groups:
+  - name: credit-risk-validation-user-impact
+    rules:
+      - alert: ValidationUserImpact
+        expr: increase(crvt_validation_requests_total{outcome="failure"}[1m]) >= 1
+        for: 0s
+        labels:
+          severity: critical
+          service: backend
+        annotations:
+          summary: "CSV validation is failing for users"
+          description: "At least one real validation request failed during the last minute."
+          runbook_url: "https://github.com/tomatriz/ai-dev-tools-credit-risk-validation-tracker/blob/main/docs/INCIDENT_RESPONSE.md"
+

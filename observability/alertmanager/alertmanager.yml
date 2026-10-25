@@ -1,0 +1,16 @@
+route:
+  receiver: bounded-oncall-responder
+  group_wait: 1s
+  group_interval: 5s
+  repeat_interval: 1h
+
+receivers:
+  - name: bounded-oncall-responder
+    webhook_configs:
+      - url: http://oncall:8090/api/v1/alerts
+        send_resolved: true
+        http_config:
+          authorization:
+            type: Bearer
+            credentials: local-alert-token
+

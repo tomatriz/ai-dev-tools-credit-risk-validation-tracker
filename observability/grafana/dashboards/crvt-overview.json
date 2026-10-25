@@ -1,0 +1,27 @@
+{
+  "annotations": {"list": []},
+  "editable": true,
+  "panels": [
+    {
+      "type": "timeseries",
+      "title": "Validation requests by outcome",
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "targets": [{"expr": "sum by (outcome) (rate(crvt_validation_requests_total[5m]))", "legendFormat": "{{outcome}}"}],
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 0}
+    },
+    {
+      "type": "logs",
+      "title": "Correlated backend logs",
+      "datasource": {"type": "loki", "uid": "loki"},
+      "targets": [{"expr": "{job=\"crvt-backend\"}", "refId": "A"}],
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 0}
+    }
+  ],
+  "schemaVersion": 39,
+  "tags": ["credit-risk", "validation", "user-impact"],
+  "templating": {"list": []},
+  "time": {"from": "now-30m", "to": "now"},
+  "title": "Credit Risk Validation Overview",
+  "uid": "crvt-overview",
+  "version": 1
+}
