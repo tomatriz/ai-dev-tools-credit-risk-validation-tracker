@@ -2,6 +2,8 @@ services:
   - type: web
     name: crvt-api
     runtime: docker
+    plan: free
+    autoDeployTrigger: checksPass
     rootDir: backend
     dockerfilePath: ./Dockerfile
     healthCheckPath: /health
@@ -14,17 +16,20 @@ services:
         generateValue: true
       - key: OTEL_SDK_DISABLED
         value: "true"
-      - key: CORS_ORIGINS
-        sync: false
 
   - type: web
     name: crvt-dashboard
     runtime: docker
+    plan: free
+    autoDeployTrigger: checksPass
     rootDir: frontend
     dockerfilePath: ./Dockerfile
     envVars:
-      - key: VITE_API_URL
-        sync: false
+      - key: BACKEND_HOSTPORT
+        fromService:
+          name: crvt-api
+          type: web
+          property: hostport
 
 databases:
   - name: crvt-postgres

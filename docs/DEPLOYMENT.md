@@ -15,7 +15,7 @@ If a default port is already used, copy `.env.example` and change the correspond
 
 ## Public deployment design
 
-`render.yaml` is a declarative Render blueprint for the frontend, backend and managed PostgreSQL database. Create the blueprint from the public GitHub repository, set the frontend API URL to the deployed backend URL, and verify `/health`, `/docs`, a sample upload, history retrieval and persistence across a backend restart.
+`render.yaml` is a declarative Render blueprint for the frontend, backend and managed PostgreSQL database. Both web services and the database explicitly use the free plan, so Blueprint creation must not select a paid resource. The dashboard receives the API service's private `hostport` through a Render service reference and proxies `/api/v1` on the dashboard origin; no public API URL or cross-origin browser configuration is required. New commits deploy only after linked checks pass. After creation, verify `/health`, `/docs`, a sample upload, history retrieval and persistence across a backend restart.
 
 The local Grafana/Loki/Tempo/Prometheus demonstration is intentionally Compose-based. A public production deployment should use managed or separately secured telemetry endpoints and must not expose operational controls publicly.
 

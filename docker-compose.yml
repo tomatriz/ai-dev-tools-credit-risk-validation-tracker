@@ -44,6 +44,8 @@ services:
       context: ./frontend
       args:
         VITE_API_URL: ${VITE_API_URL:-/api/v1}
+    environment:
+      BACKEND_HOSTPORT: backend:8000
     ports:
       - "127.0.0.1:${CRVT_FRONTEND_PORT:-3000}:80"
     depends_on:

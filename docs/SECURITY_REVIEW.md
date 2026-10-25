@@ -19,7 +19,7 @@ The scan found five source-backed issues in the pre-hardening snapshot: two high
 - the responder container runs as a non-root user;
 - the alert now uses a resolvable incident-active gauge.
 
-Regression tests cover unmatched metric labels, pre-parser body rejection, row/error caps and gauge reset. The complete one-command suite passed after these changes. A fresh container build and end-to-end incident rerun are still required after Docker Desktop host recovery.
+Regression tests cover unmatched metric labels, pre-parser body rejection, row/error caps and gauge reset. The complete one-command suite passed after these changes. The hardened containers were rebuilt and the end-to-end incident rerun completed with `INCIDENT_DEMO_OK`.
 
 ## Secret and data review
 

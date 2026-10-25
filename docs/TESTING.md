@@ -63,5 +63,5 @@ On 2026-10-25, `scripts/test.ps1` completed successfully from the repository roo
 - TypeScript/Vite production build: passed;
 - `npm ci` audit: 0 vulnerabilities.
 
-`docker compose config --quiet` also passed. A previous Compose run verified upload, history, PostgreSQL restart persistence and all service health checks. The final hardened image rebuild and alert-to-responder rerun remain pending because Docker Desktop cannot currently start on this host; project volumes were not reset or deleted.
+`docker compose config --quiet` also passed. The hardened backend, frontend and responder images rebuilt successfully. The complete stack became healthy on alternate loopback ports, an upload through the frontend proxy returned 201, and validation `89bcf4d7-f3f5-45c9-943f-deb77b5bff30` remained available after a backend restart. The final incident script observed the controlled 503, verified alert-to-responder remediation, completed a post-recovery upload and emitted `INCIDENT_DEMO_OK`.
 

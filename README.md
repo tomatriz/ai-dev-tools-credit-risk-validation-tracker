@@ -140,9 +140,11 @@ Verified local results on 2026-10-25:
 - frontend production build: **passed**;
 - `npm ci` audit: **0 vulnerabilities**;
 - Compose configuration: **valid**;
-- backend, frontend, and responder images: **built successfully before the final hardening patch**; a rebuild is pending because Docker Desktop is currently unavailable on the host;
+- hardened backend, frontend, and responder images: **built successfully**;
 - Compose upload through the frontend proxy: **HTTP 201**;
-- PostgreSQL persistence after database/backend restart: **verified**.
+- PostgreSQL persistence after backend restart: **verified**;
+- controlled user-impact incident: **HTTP 503 observed**;
+- alert-to-responder recovery: **verified**, ending with `INCIDENT_DEMO_OK` and a post-recovery HTTP 201.
 
 See [Testing Strategy and Evidence](docs/TESTING.md) and [Evaluation](docs/EVALUATION.md) for limitations and runtime evidence.
 
