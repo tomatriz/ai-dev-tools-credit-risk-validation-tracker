@@ -1,0 +1,38 @@
+name: Roll back production
+
+on:
+  workflow_dispatch:
+    inputs:
+      known_good_sha:
+        description: "Previously verified 40-character commit SHA"
+        required: true
+        type: string
+      incident_reference:
+        description: "Issue or incident reference"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  deployments: write
+
+jobs:
+  rollback:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.known_good_sha }}
+      - name: Verify rollback target
+        run: |
+          [[ "${{ inputs.known_good_sha }}" =~ ^[0-9a-f]{40}$ ]]
+          test "$(git rev-parse HEAD)" = "${{ inputs.known_good_sha }}"
+      - name: Deploy known-good revision
+        env:
+          DEPLOY_HOOK: ${{ secrets.RENDER_PRODUCTION_DEPLOY_HOOK }}
+          RELEASE_SHA: ${{ inputs.known_good_sha }}
+        run: |
+          test -n "$DEPLOY_HOOK"
+          curl --fail-with-body --retry 3 --request POST "$DEPLOY_HOOK&ref=$RELEASE_SHA"
+
