@@ -65,7 +65,11 @@ def get_settings() -> Settings:
         cors_origins=tuple(
             origin.strip()
             for origin in os.getenv(
-                "CORS_ORIGINS", "http://localhost:3000,http://localhost:5173"
+                "CORS_ORIGINS",
+                (
+                    "http://localhost:3000,http://localhost:5173,"
+                    "https://tomatriz.github.io"
+                ),
             ).split(",")
             if origin.strip()
         ),

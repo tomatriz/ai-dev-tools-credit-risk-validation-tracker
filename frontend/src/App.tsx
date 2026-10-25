@@ -5,6 +5,8 @@ import { UploadPanel } from './components/UploadPanel'
 import { ValidationDetail } from './components/ValidationDetail'
 import type { Validation } from './types'
 
+const API_DOCS_URL = import.meta.env.VITE_API_DOCS_URL || '/docs'
+
 function messageFor(error: unknown): string {
   if (error instanceof ApiError) {
     if (error.status === 503) return 'Validation is temporarily unavailable. The operations team has been notified; please try again shortly.'
@@ -77,7 +79,7 @@ export default function App() {
         <nav aria-label="Primary navigation">
           <a href="#workspace">Workspace</a>
           <a href="#history-title">History</a>
-          <a href="/docs" target="_blank" rel="noreferrer">API docs <span aria-hidden="true">↗</span></a>
+          <a href={API_DOCS_URL} target="_blank" rel="noreferrer">API docs <span aria-hidden="true">↗</span></a>
         </nav>
         <span className="environment"><i /> Demo environment</span>
       </header>
