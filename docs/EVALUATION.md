@@ -95,7 +95,6 @@ A formal repository-wide static scan found five issues in the pre-hardening snap
 
 ## Remaining course-completion actions
 
-1. Submit the exact final public SHA in the course portal and preserve its confirmation.
-2. Complete three peer reviews separately for course completion.
+1. Complete three peer reviews separately for course completion.
 
-All 24 rubric points now have implementation and runtime evidence. Portal submission and peer reviews are course-process requirements, not additional rubric points.
+All 24 rubric points now have implementation and runtime evidence, and the portal submission is confirmed. Peer reviews are a separate course-process requirement, not an additional rubric point.
