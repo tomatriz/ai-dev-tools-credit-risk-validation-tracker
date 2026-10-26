@@ -10,7 +10,7 @@
 | Frontend Engineer | Accessible dashboard and history UX | Frontend and tests | No mocked final results |
 | QA Engineer | Independent functional and failure testing | Test/evaluation evidence | Records failures honestly |
 | DevOps/SRE Engineer | Containers, delivery, telemetry and incident response | Compose, workflows, runbooks | Bounded remediation; no arbitrary execution |
-| Technical Documentation Specialist | Reproducible docs and learning material | English academic docs; Spanish enterprise docs | Sanitizes private/confidential material |
+| Technical Documentation Specialist | Reproducible docs and learning material | English academic docs; Spanish learning guide | Sanitizes private/confidential material |
 
 ## Coordination
 
@@ -18,4 +18,4 @@ The Lead converts the official rubric into tasks. Parallel agents own separate d
 
 ## Real agent activity
 
-The project was started in Codex with parallel specialized subagents for backend, frontend and enterprise/documentation work. Their outputs are integrated and independently checked by the lead. GitHub Issue links and agent comments will be added after the public repository is available; the local handoff log remains in `docs/TASK_TRACKER.md`.
+The project was started in Codex with parallel specialized subagents for backend, frontend and documentation work. Their outputs are integrated and independently checked by the lead. GitHub Issue links and agent comments will be added after the public repository is available; the local handoff log remains in `docs/TASK_TRACKER.md`.

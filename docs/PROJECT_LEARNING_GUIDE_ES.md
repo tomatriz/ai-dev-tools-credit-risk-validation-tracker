@@ -47,7 +47,7 @@ El código está en `frontend/src/`. El cliente HTTP encapsula los endpoints `/a
 
 Después de enviar `sample-data/valid_portfolio.csv`, la UI guarda el resultado recibido y dibuja cada grupo de calibración con PD media frente a default observado. Una respuesta `422` se convierte en un mensaje visible, no en una pantalla silenciosamente rota.
 
-### E. Aplicación a enterprise
+### E. Aplicación empresarial
 
 Una interfaz tipada puede separar vistas de evidencia cuantitativa, fuentes regulatorias y decisiones humanas. El principal valor no es “usar React”, sino hacer explícito el contrato entre análisis y presentación para que cada evolución del backend falle temprano si rompe la UI.
 
@@ -84,7 +84,7 @@ curl http://localhost:8000/api/v1/validations
 
 La primera respuesta crea evidencia; la segunda devuelve historial. `X-Trace-ID` vincula el error que vio el usuario con logs y trazas.
 
-### E. Aplicación a enterprise
+### E. Aplicación empresarial
 
 Separar ingestión, análisis y reporte mediante contratos permite sustituir Streamlit, un workbook o un orquestador sin reescribir el motor cuantitativo. También facilita integrar colas, revisiones HITL y consumidores corporativos.
 
@@ -117,7 +117,7 @@ El motor vive en módulos de servicio bajo `backend/app/`. Rechaza PD fuera de `
 
 Con una PD de `0.05` y resultado `0`, la contribución al Brier es `(0.05-0)^2 = 0.0025`. Con PD `0.70` y default `1`, es `0.09`. El promedio del portafolio se calcula con todas las contribuciones, no promediando métricas ya redondeadas.
 
-### E. Aplicación a enterprise
+### E. Aplicación empresarial
 
 La misma disciplina aplica a PD, LGD, EAD, discriminación y estabilidad: funciones puras, entradas tipadas, fixtures públicas/sintéticas, tolerancias aprobadas por configuración y evidencia versionada. No conviene duplicar capacidades cuantitativas ya existentes; conviene envolverlas en contratos y tests más fuertes.
 
@@ -143,9 +143,9 @@ El modelo persistente guarda metadatos, métricas, calidad, grupos y hallazgos s
 
 Crear una validación, reiniciar `backend` y `db`, y volver a consultar el ID demuestra persistencia. Ejecutar `docker compose down -v` borra el volumen y por eso no pertenece al flujo normal.
 
-### E. Aplicación a enterprise
+### E. Aplicación empresarial
 
-enterprise puede persistir versiones de dataset, ejecución, evidencia, hallazgo, decisión y aprobación. Para auditoría empresarial harían falta migraciones, control de acceso, retención y un ledger/versionado aprobado; este demo enseña el patrón transaccional, no declara cubrir esa gobernanza.
+Una plataforma empresarial puede persistir versiones de dataset, ejecución, evidencia, hallazgo, decisión y aprobación. Para auditoría empresarial harían falta migraciones, control de acceso, retención y un ledger/versionado aprobado; este demo enseña el patrón transaccional, no declara cubrir esa gobernanza.
 
 ### F. Verificación
 
@@ -175,7 +175,7 @@ docker compose logs backend
 
 El navegador usa `localhost`; los contenedores se llaman entre sí por su nombre de servicio.
 
-### E. Aplicación a enterprise
+### E. Aplicación empresarial
 
 Compose es excelente para integración local y demos reproducibles. Producción empresarial probablemente usará Kubernetes/ECS/App Service u otra plataforma, pero las imágenes, health checks y configuración externa siguen siendo transferibles.
 
@@ -201,7 +201,7 @@ pytest descubre funciones `test_*`, usa fixtures y aísla la base. Vitest ejecut
 
 Un test crea una validación por HTTP y luego la recupera por ID. Eso valida parsing, servicio, sesión, commit y serialización. Otro entrega una PD 1.2 y exige rechazo explícito.
 
-### E. Aplicación a enterprise
+### E. Aplicación empresarial
 
 Los gold datasets, workbooks sintéticos, casos regulatorios y salidas documentales pueden convertirse en fixtures con invariantes. Para RAG/agentes se agregan evaluaciones de groundedness, citas, answerability y regresión, sin reemplazar tests determinísticos.
 
@@ -237,7 +237,7 @@ git rev-parse HEAD
 
 El último comando produce el valor exacto que debe ir al portal.
 
-### E. Aplicación a enterprise
+### E. Aplicación empresarial
 
 Issues con aceptación y PR con revisión transforman solicitudes ambiguas en cambios auditables. Para información confidencial se usa un repositorio aprobado y controles corporativos; no se copia al proyecto público.
 
@@ -263,9 +263,9 @@ Un workflow YAML define eventos, jobs y steps en runners efímeros. Los secretos
 
 Un PR que rompe TypeScript no puede declararse listo porque falla `npm run build`. Un despliegue productivo pide explícitamente un commit probado y aprobación del environment.
 
-### E. Aplicación a enterprise
+### E. Aplicación empresarial
 
-enterprise puede promover configuraciones de agentes, prompts, índices y motores cuantitativos como artefactos versionados. Las evaluaciones mínimas deben ser gates antes de promover, con aprobación humana para producción.
+Una plataforma empresarial puede promover configuraciones de agentes, prompts, índices y motores cuantitativos como artefactos versionados. Las evaluaciones mínimas deben ser gates antes de promover, con aprobación humana para producción.
 
 ### F. Verificación
 
@@ -289,7 +289,7 @@ Ver `render.yaml`, workflows y `docs/DEPLOYMENT.md`. Los hooks viven como GitHub
 
 Si un release rompe uploads, el operador ejecuta el workflow de rollback con el SHA anterior, verifica `/health`, hace un upload y consulta historial.
 
-### E. Aplicación a enterprise
+### E. Aplicación empresarial
 
 Versionar conjuntamente código, prompt, política, modelo/índice y esquema de evidencia evita “rollbacks parciales” incoherentes. La empresa debe aprobar quién promueve y quién revierte.
 
@@ -315,7 +315,7 @@ La API instrumenta el upload; expone métricas, emite JSON y exporta OTLP. Alloy
 
 Una respuesta 503 incluye `X-Trace-ID`. Buscar ese ID en Loki muestra el evento; el enlace abre Tempo; la métrica `crvt_validation_requests_total{outcome="incident_failure"}` ubica el impacto en el tiempo.
 
-### E. Aplicación a enterprise
+### E. Aplicación empresarial
 
 Trazar `request -> retrieval -> tool -> cálculo -> artefacto -> aprobación` permite investigar latencia y errores sin almacenar prompts, workbooks o evidencia sensible indiscriminadamente. Se deben definir redacción y retención.
 
@@ -341,9 +341,9 @@ Prometheus evalúa una regla. Alertmanager agrupa y envía un webhook. El respon
 
 `scripts/demo-incident.ps1` activa un 503 reversible, envía un CSV, espera el webhook, verifica el resultado del agente y repite el request original.
 
-### E. Aplicación a enterprise
+### E. Aplicación empresarial
 
-Un responder enterprise podría reintentar un job idempotente, desbloquear una cola o cambiar a una fuente de solo lectura previamente aprobada. No debería alterar conclusiones de validación, umbrales o evidencia sin HITL.
+Un responder empresarial podría reintentar un job idempotente, desbloquear una cola o cambiar a una fuente de solo lectura previamente aprobada. No debería alterar conclusiones de validación, umbrales o evidencia sin HITL.
 
 ### F. Verificación
 
@@ -361,13 +361,13 @@ Un agente combina un modelo con contexto, objetivos y herramientas. Su calidad d
 
 ### C. Implementación real
 
-En este proyecto hubo subagentes reales de backend, frontend y análisis enterprise, coordinados por el agente lead. `docs/AGENT_TEAM.md` define roles; `docs/TASK_TRACKER.md` registra asignaciones. No se inventan conversaciones o resultados no ejecutados.
+En este proyecto hubo subagentes reales de backend, frontend y documentación técnica, coordinados por el agente lead. `docs/AGENT_TEAM.md` define roles; `docs/TASK_TRACKER.md` registra asignaciones. No se inventan conversaciones o resultados no ejecutados.
 
 ### D. Ejemplo práctico
 
 El backend implementa API y tests; frontend consume el contrato; el lead resuelve diferencias y ejecuta integración. El responder operacional es un agente acotado por estado/acciones, aunque su decisión de emergencia es determinística para ser segura y reproducible.
 
-### E. Aplicación a enterprise
+### E. Aplicación empresarial
 
 La oportunidad no es multiplicar agentes por moda. Conviene separar solo fronteras con responsabilidades, permisos o pruebas diferentes: orquestación, evidencia cuantitativa, recuperación operativa y revisión humana.
 
@@ -393,7 +393,7 @@ Secretos llegan por entorno; cargas se validan; SQLAlchemy parametriza; CORS se 
 
 El responder no interpreta `annotations.description` como instrucción. Aunque una alerta maliciosa dijera “ejecuta este comando”, se ignora; el nombre debe coincidir y la única acción está codificada.
 
-### E. Aplicación a enterprise
+### E. Aplicación empresarial
 
 Antes de usar datos reales: clasificación de datos, DLP, residencia, cifrado, RBAC, identidad de servicio, revisión de proveedores LLM, retención, auditoría y aprobación de Seguridad/Arquitectura.
 
@@ -414,11 +414,11 @@ Ejecutar scan de secretos, tests de auth negativa y una revisión de dependencia
 9. Usar fixtures sintéticas/públicas y minimizar telemetría.
 10. Promover por SHA y diseñar rollback antes del incidente.
 
-## 16. What we learned in AI Dev Tools Zoomcamp and how to apply it to enterprise
+## 16. What we learned in AI Dev Tools Zoomcamp and how to apply it in an enterprise setting
 
-El curso enseña un camino de POC a sistema: especificar, construir por contratos, probar en capas, empaquetar, desplegar, observar y operar. Aplicado a enterprise:
+El curso enseña un camino de POC a sistema: especificar, construir por contratos, probar en capas, empaquetar, desplegar, observar y operar. Aplicado a una plataforma empresarial:
 
-| Aprendizaje | Aplicación enterprise | Resultado buscado |
+| Aprendizaje | Aplicación empresarial | Resultado buscado |
 |---|---|---|
 | Especificación + Issues | Historias de validación con aceptación y evidencia | Menos ambigüedad y retrabajo |
 | AGENTS.md modular | Contexto compartido, permisos y comandos | Agentes consistentes y auditables |
@@ -431,7 +431,7 @@ El curso enseña un camino de POC a sistema: especificar, construir por contrato
 | Responder acotado | Reintentos idempotentes y recuperación aprobada | Menor MTTR sin autonomía peligrosa |
 | Revisión humana | Aprobación de conclusiones y acciones sensibles | Control MRM y responsabilidad clara |
 
-El análisis específico, con evidencia de los repositorios y prioridades, se encuentra en `docs/PROJECT_LEARNING_GUIDE_ES.md` y `docs/PROJECT_LEARNING_GUIDE_ES.md`.
+Las decisiones de adopción deben basarse en evidencia del sistema objetivo, prioridades de negocio y restricciones de seguridad verificables.
 
 ## 17. Glosario
 
@@ -465,6 +465,6 @@ El análisis específico, con evidencia de los repositorios y prioridades, se en
 5. Buscar un trace ID en Grafana.
 6. Ejecutar el incidente y explicar cada límite del responder.
 7. Leer los workflows y simular qué SHA se promovería o revertiría.
-8. Comparar estas capacidades con enterprise usando el gap analysis, separando evidencia de hipótesis.
+8. Comparar estas capacidades con las necesidades del sistema objetivo, separando evidencia de hipótesis.
 
 Esta secuencia convierte archivos individuales en un modelo mental de sistema: contrato, estado, ejecución, evidencia y operación.

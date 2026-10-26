@@ -23,7 +23,7 @@ Regression tests cover unmatched metric labels, pre-parser body rejection, row/e
 
 ## Secret and data review
 
-No live API key, deploy hook, private key, customer dataset or confidential enterprise/client code was found. Values such as `local-demo-token`, `local-alert-token`, `local_demo_only` and test tokens are explicit local placeholders. `.env` is ignored; non-local deployment must provide secret values through the platform.
+No live API key, deploy hook, private key, customer dataset or confidential client code was found. Values such as `local-demo-token`, `local-alert-token`, `local_demo_only` and test tokens are explicit local placeholders. `.env` is ignored; non-local deployment must provide secret values through the platform.
 
 ## Boundary
 

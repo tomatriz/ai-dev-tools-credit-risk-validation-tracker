@@ -191,7 +191,7 @@ The flag causes upload requests to return `503` without deleting data. Prometheu
 
 ## Product and agent workflow
 
-The project was built by a real Codex agent team with separate backend, frontend, QA/SRE, and enterprise documentation responsibilities. The Lead integrated contracts and independently reran tests. Two cross-component defects in the initial incident path were found during review and corrected before finalization.
+The project was built by a real Codex agent team with separate backend, frontend, QA/SRE, and technical documentation responsibilities. The Lead integrated contracts and independently reran tests. Two cross-component defects in the initial incident path were found during review and corrected before finalization.
 
 - [Product specification and acceptance criteria](docs/PRODUCT_SPEC.md)
 - [Task tracker seed and agent usage log](docs/TASK_TRACKER.md)
@@ -218,14 +218,10 @@ Academic/evaluator documentation is in English:
 Additional Spanish study material:
 
 - [Guía completa de aprendizaje](docs/PROJECT_LEARNING_GUIDE_ES.md)
-- [Análisis de brechas enterprise — sanitizado](docs/PROJECT_LEARNING_GUIDE_ES.md)
-- [Roadmap de mejoras enterprise — sanitizado](docs/PROJECT_LEARNING_GUIDE_ES.md)
-
-Private repository evidence is deliberately omitted from the public reports. Public-source conclusions retain file/function references; private-source conclusions remain capability-level and identify their verification limits.
 
 ## Security and limitations
 
-- Synthetic data only; no enterprise/client data or source code is included.
+- Synthetic data only; no client data or source code is included.
 - `.env` is ignored; examples contain local-only placeholders.
 - Compose host ports bind to `127.0.0.1`; public deployments must provide non-placeholder credentials.
 - Uploads have independent request-byte, CSV-row, error-detail and retained-history limits.

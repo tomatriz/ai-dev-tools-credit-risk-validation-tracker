@@ -6,7 +6,7 @@ Build and verify a public, non-confidential full-stack demonstration for AI Dev 
 
 ## Non-negotiable rules
 
-- Use only synthetic or explicitly public data. Never copy enterprise/client code, data, credentials, or internal details.
+- Use only synthetic or explicitly public data. Never copy client code, data, credentials, or internal details.
 - Treat all PASS/WARNING/FAIL thresholds as configurable demonstration policy, not regulatory requirements.
 - Do not claim a test, deployment, incident response, GitHub issue, or submission succeeded without evidence.
 - Keep secrets out of Git; use `.env.example` and repository/environment secrets.
@@ -18,7 +18,7 @@ Build and verify a public, non-confidential full-stack demonstration for AI Dev 
 - `frontend/`: React + TypeScript dashboard and frontend tests.
 - `oncall/`: bounded incident responder and tests.
 - `observability/`: Prometheus, Grafana, Loki, Tempo, Alloy and alerting configuration.
-- `docs/`: product, architecture, operations, evidence, learning and sanitized enterprise comparison.
+- `docs/`: product, architecture, operations, evidence and learning material.
 - `.github/workflows/`: CI and deployment workflows.
 
 ## Working process

@@ -13,7 +13,7 @@ This file records the initial agent backlog and its public GitHub Issues mirror.
 | [CRVT-7](https://github.com/tomatriz/ai-dev-tools-credit-risk-validation-tracker/issues/7) | Demonstrate alert and on-call remediation | Reproducible incident transcript/evidence | SRE/QA | Closed; full drill emitted `INCIDENT_DEMO_OK` |
 | [CRVT-8](https://github.com/tomatriz/ai-dev-tools-credit-risk-validation-tracker/issues/8) | Independent verification and rubric audit | Test report and 12-criterion evidence matrix | QA | Closed; strict limitations recorded |
 | [CRVT-9](https://github.com/tomatriz/ai-dev-tools-credit-risk-validation-tracker/issues/9) | Publish, deploy and submit | Public URLs, exact SHA, portal confirmation | Lead | Ready to close; authenticated course platform displays `STATUS: SUBMITTED` |
-| [CRVT-10](https://github.com/tomatriz/ai-dev-tools-credit-risk-validation-tracker/issues/10) | Produce enterprise analysis and learning guide | Sanitized evidence-backed Spanish documents | Technical Writer | Closed |
+| [CRVT-10](https://github.com/tomatriz/ai-dev-tools-credit-risk-validation-tracker/issues/10) | Produce the Spanish learning guide | Evidence-backed educational documentation | Technical Writer | Closed |
 
 ## Agent usage log
 

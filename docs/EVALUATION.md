@@ -8,7 +8,7 @@ This audit maps the repository to the official AI Dev Tools Zoomcamp 2026 Projec
 |---:|---|---:|---:|---|---|
 | 1 | Problem Description | 2 | 2 | `README.md` describes problem, users, behavior, calculations, limitations and example flow | None material |
 | 2 | Product Specification | 2 | 2 | `docs/PRODUCT_SPEC.md`, acceptance criteria, `docs/TASK_TRACKER.md`, real agent assignment log and [public GitHub Issues](https://github.com/tomatriz/ai-dev-tools-credit-risk-validation-tracker/issues) | None material |
-| 3 | Agent Team Specification | 2 | 2 | `docs/AGENT_TEAM.md`; real parallel backend/frontend/enterprise work and independent integration review | Public tracker comments strengthen evidence |
+| 3 | Agent Team Specification | 2 | 2 | `docs/AGENT_TEAM.md`; real parallel backend/frontend/documentation work and independent integration review | Public tracker comments strengthen evidence |
 | 4 | Context Management | 2 | 2 | `AGENTS.md` links modular product, architecture, team and test docs | None material |
 | 5 | Full-Stack Application | 2 | 2 | React -> Nginx/FastAPI -> PostgreSQL; public upload, history/detail and cross-deploy persistence observed | None material |
 | 6 | Testing | 2 | 2 | 23 backend + 2 responder + 8 frontend tests passed; single-command script, production build and CI | No browser E2E suite; not required for full points when unit/integration pass |
@@ -61,7 +61,7 @@ The README names the spreadsheet/evidence reproducibility problem, intended vali
 
 ### 3–4. Agent team and context
 
-The team specification defines responsibilities, deliverables, guardrails and handoffs. Real subagents implemented backend, frontend and sanitized enterprise research in separate areas. The lead integrated them, reran tests, and corrected cross-component API/metric mismatches. `AGENTS.md` provides durable instructions and routes agents into modular documents.
+The team specification defines responsibilities, deliverables, guardrails and handoffs. Real subagents implemented backend, frontend and technical documentation in separate areas. The lead integrated them, reran tests, and corrected cross-component API/metric mismatches. `AGENTS.md` provides durable instructions and routes agents into modular documents.
 
 ### 5. Application
 
@@ -91,7 +91,7 @@ The final runtime drill observed the 503, alert delivery and a new responder res
 
 ### Security review
 
-A formal repository-wide static scan found five issues in the pre-hardening snapshot: two high, one medium and two low. The current tree contains remediations plus regression tests for bounded metric labels, request/row/error/history limits, workflow input handling, loopback-only local ports, explicit demo credentials and a non-root responder. No live secret, private key, customer data or confidential enterprise/client code was found. See `docs/SECURITY_REVIEW.md`. The hardened containers were rebuilt and the incident path passed end to end.
+A formal repository-wide static scan found five issues in the pre-hardening snapshot: two high, one medium and two low. The current tree contains remediations plus regression tests for bounded metric labels, request/row/error/history limits, workflow input handling, loopback-only local ports, explicit demo credentials and a non-root responder. No live secret, private key, customer data or confidential client code was found. See `docs/SECURITY_REVIEW.md`. The hardened containers were rebuilt and the incident path passed end to end.
 
 ## Remaining course-completion actions
 
