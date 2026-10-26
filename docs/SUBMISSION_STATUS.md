@@ -2,19 +2,19 @@
 
 ## Current state
 
-**SUBMITTED — CONFIRMED.** The authenticated course platform displayed its saved-submission confirmation and `STATUS: SUBMITTED` on 2026-10-25.
+**SUBMITTED — CONFIRMED.** The authenticated course platform displayed its saved-submission confirmation and `STATUS: SUBMITTED` on 2026-10-26.
 
 | Item | Value |
 |---|---|
 | Public repository | https://github.com/tomatriz/ai-dev-tools-credit-risk-validation-tracker |
-| Runtime-evidence commit | `bea7a600075eecba7754c9894e61b483ebb2701b` |
-| Evaluated release | `previous-public-release` (`initial-submission-release`); portal field stores required prefix `previous-release` |
+| Runtime evidence | Production and persistence evidence is documented in the sanitized public transcript linked below |
+| Evaluated release | Current public `main`; the authenticated portal stores the final submitted commit prefix |
 | Production dashboard | https://crvt-dashboard.onrender.com |
 | Production API | https://crvt-api.onrender.com |
 | Development dashboard | https://tomatriz.github.io/ai-dev-tools-credit-risk-validation-tracker/ |
 | OpenAPI UI | https://crvt-api.onrender.com/docs |
 | Tests | 23 backend + 2 responder + 8 frontend passed in public CI; frontend build, Compose contract and Prometheus rules passed |
-| CI/CD evidence | [CI run 40245553956](https://github.com/tomatriz/ai-dev-tools-credit-risk-validation-tracker/actions/runs/40245553956) and [automatic development deployment 40245588041](https://github.com/tomatriz/ai-dev-tools-credit-risk-validation-tracker/actions/runs/40245588041) |
+| CI/CD evidence | [CI run 40327236666](https://github.com/tomatriz/ai-dev-tools-credit-risk-validation-tracker/actions/runs/40327236666) and [automatic development deployment 40327289953](https://github.com/tomatriz/ai-dev-tools-credit-risk-validation-tracker/actions/runs/40327289953) |
 | Manual production deployment | Render deploy `dep-dbf95mlg1s2s73eub47g`, successful for the runtime-evidence commit |
 | Course portal | Saved and confirmed in the authenticated Project 1 form |
 | Portal confirmation | Saved-submission thank-you message plus `STATUS: SUBMITTED` |
